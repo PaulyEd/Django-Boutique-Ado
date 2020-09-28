@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'home',
 
 ]
 
@@ -60,12 +62,15 @@ ROOT_URLCONF = 'boutique_ado.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by allauth
+                'django.template.context_processors.request',  # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -85,13 +90,13 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # can use email or username
-ACCOUNT_EMAIL_REQUIRED = True # email address required
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # verification required
-ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True # enter email twice 
-ACCOUNT_USERNAME_MIN_LENGTH = 4 # username min 4 char
-LOGIN_URL = '/accounts/login/' # link to login page
-LOGIN_REDIRECT_URL = '/' # redirect once logged in
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'  # can use email or username
+ACCOUNT_EMAIL_REQUIRED = True  # email address required
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # verification required
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True  # enter email twice 
+ACCOUNT_USERNAME_MIN_LENGTH = 4  # username min 4 char
+LOGIN_URL = '/accounts/login/'  # link to login page
+LOGIN_REDIRECT_URL = '/'  # redirect once logged in
 
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
